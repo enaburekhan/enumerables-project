@@ -8,4 +8,12 @@ module Enumerable
       arr
     end
   end
+  def my_each_with_index
+    arr = self
+    for i in 0..(arr.length - 1)
+      yield(arr[i], i)
+    end
+  end    
 end
+
+
