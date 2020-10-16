@@ -21,4 +21,14 @@ module Enumerable
       end
     end
   end
+  def my_all?
+    my_each do |num|
+      if yield(num) == false
+        puts false
+        return false 
+      end
+    end
+    puts true
+    return true 
+  end 
 end

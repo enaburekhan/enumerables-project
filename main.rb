@@ -13,3 +13,7 @@ end
 # my_select
 array = [4, 5, 3, 8, 9]
 array.my_select{|item| item.even?}
+
+# my_all?
+arr = [2, 2, 2]
+arr.my_all? { |num|  num == 2  }
