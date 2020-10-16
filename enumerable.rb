@@ -13,7 +13,12 @@ module Enumerable
     for i in 0..(arr.length - 1)
       yield(arr[i], i)
     end
-  end    
+  end
+  def my_select
+    my_each do |item|
+      if yield(item)
+        puts item
+      end
+    end
+  end
 end
-
-
