@@ -13,22 +13,46 @@ module Enumerable
     for i in 0..(arr.length - 1)
       yield(arr[i], i)
     end
+    arr
   end
   def my_select
+    result = []
     my_each do |item|
       if yield(item)
-        puts item
+        result.push(item)
       end
     end
+    puts "#{result}"
+    result
   end
   def my_all?
     my_each do |num|
       if yield(num) == false
         puts false
-        return false 
+        return false
       end
     end
     puts true
-    return true 
-  end 
+    return true
+  end
+  def my_any?
+    my_each do |num|
+      if yield(num) == true
+        puts true
+        return true
+      end
+    end
+    puts false
+    return false
+  end
+  def my_none?
+    my_each do |num|
+      if yield(num) == true
+        puts false
+        return false
+      end
+    end
+    puts true
+    return true
+  end
 end

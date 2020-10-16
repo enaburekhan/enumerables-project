@@ -16,4 +16,12 @@ array.my_select{|item| item.even?}
 
 # my_all?
 arr = [2, 2, 2]
-arr.my_all? { |num|  num == 2  }
+arr.my_all? { |num| num == 2 }
+
+# my_any?
+arr = [2, 2, 2, 4]
+arr.my_any? { |num| num > 3 }
+
+# my_none?
+arr = [2, 2, 2, 4]
+arr.my_none? { |num| num < 1 }
