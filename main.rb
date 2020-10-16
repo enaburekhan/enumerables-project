@@ -25,3 +25,11 @@ arr.my_any? { |num| num > 3 }
 # my_none?
 arr = [2, 2, 2, 4]
 arr.my_none? { |num| num < 1 }
+
+# my_count
+arr = [2, 2, 2, 4, 5]
+arr.my_count
+
+# my_map
+arr = ['one', 'two', 'three']
+arr.my_map { |item| item.upcase }

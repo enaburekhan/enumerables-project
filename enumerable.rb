@@ -55,4 +55,22 @@ module Enumerable
     puts true
     return true
   end
+  def my_count
+    count = 0
+    my_each do |acc|
+      count += 1
+    end
+    puts count
+    return count
+  end
+  def my_map
+    array = []
+    my_each do |item|
+      array.push(yield(item)) 
+    end
+    puts "#{array}"
+    array
+  end 
 end
+
+
