@@ -101,4 +101,14 @@ module Enumerable
     arr = self
     num = arr.my_inject(1, "*")
   end
+  def my_map_proc(proc = nil)
+    new_array = []
+    if proc 
+      my_each { |item| new_array << proc.call(item) } 
+    elsif block_given?
+      my_each { |item|  new_array << yield(item) } 
+    end
+    p new_array
+    new_array
+  end      
 end
