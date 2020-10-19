@@ -1,30 +1,33 @@
+# frozen_string_literal: true
+
 module Enumerable
   def my_each
     arr = self
-    if arr.kind_of?(Array)
-      for i in 0..(arr.length - 1)
+    if arr.is_a?(Array)
+      (0..(arr.length - 1)).each do |i|
         yield(arr[i])
       end
       arr
     end
   end
+
   def my_each_with_index
     arr = self
-    for i in 0..(arr.length - 1)
+    (0..(arr.length - 1)).each do |i|
       yield(arr[i], i)
     end
     arr
   end
+
   def my_select
     result = []
     my_each do |item|
-      if yield(item)
-        result.push(item)
-      end
+      result.push(item) if yield(item)
     end
-    puts "#{result}"
+    puts result.to_s
     result
   end
+
   def my_all?
     my_each do |num|
       if yield(num) == false
@@ -33,8 +36,9 @@ module Enumerable
       end
     end
     puts true
-    return true
+    true
   end
+
   def my_any?
     my_each do |num|
       if yield(num) == true
@@ -43,8 +47,9 @@ module Enumerable
       end
     end
     puts false
-    return false
+    false
   end
+
   def my_none?
     my_each do |num|
       if yield(num) == true
@@ -53,24 +58,27 @@ module Enumerable
       end
     end
     puts true
-    return true
+    true
   end
+
   def my_count
     count = 0
-    my_each do |acc|
+    my_each do |_acc|
       count += 1
     end
     puts count
-    return count
+    count
   end
+
   def my_map
     array = []
     my_each do |item|
       array.push(yield(item))
     end
-    puts "#{array}"
+    puts array.to_s
     array
   end
+
   def my_inject(start_number = nil, sym = nil)
     # We have to check elements in parentheses
     # because elements in parentheses have priority over the block
@@ -87,28 +95,30 @@ module Enumerable
       sym = start_number
       start_number = 0
       my_each do |item|
-        start_number = start_number.send( sym.to_sym, item)
+        start_number = start_number.send(sym.to_sym, item)
       end
     elsif !block_given? && !sym.nil? && !start_number.nil? # arr.my_inject(2, "+")
       my_each do |item|
-        start_number = start_number.send( sym.to_sym, item)
+        start_number = start_number.send(sym.to_sym, item)
       end
     end
     puts "the result is #{start_number}"
-    return start_number
+    start_number
   end
+
   def multiply_els
     arr = self
-    num = arr.my_inject(1, "*")
+    arr.my_inject(1, '*')
   end
+
   def my_map_proc(proc = nil)
     new_array = []
-    if proc 
-      my_each { |item| new_array << proc.call(item) } 
+    if proc
+      my_each { |item| new_array << proc.call(item) }
     elsif block_given?
-      my_each { |item|  new_array << yield(item) } 
+      my_each { |item| new_array << yield(item) }
     end
     p new_array
     new_array
-  end      
+  end
 end
