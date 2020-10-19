@@ -82,22 +82,14 @@ module Enumerable
   def my_inject(start_number = nil, sym = nil)
     # We have to check elements in parentheses
     # because elements in parentheses have priority over the block
-    if block_given? && sym.nil? && start_number.nil? # arr.my_inject{|item, number| item + number}
-      start_number = 0
+    if block_given? && sym.nil?
+      start_number = start_number ? start_number : 0
       my_each do |item|
         start_number = yield(start_number, item)
       end
-    elsif block_given? && sym.nil? && !start_number.nil? # arr.my_inject(2){|item, number| item + number}
-      my_each do |item|
-        start_number = yield(start_number, item)
-      end
-    elsif !block_given? && (start_number.is_a?(String) || start_number.is_a?(Symbol)) # arr.my_inject("+")
-      sym = start_number
-      start_number = 0
-      my_each do |item|
-        start_number = start_number.send(sym.to_sym, item)
-      end
-    elsif !block_given? && !sym.nil? && !start_number.nil? # arr.my_inject(2, "+")
+    else
+      sym = start_number.is_a?(String) || start_number.is_a?(Symbol) ? start_number : sym
+      start_number = start_number.is_a?(String) || start_number.is_a?(Symbol) ||start_number.nil? ? 0 : start_number
       my_each do |item|
         start_number = start_number.send(sym.to_sym, item)
       end

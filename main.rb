@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './enumerable.rb'
+require './enumerable.rb' 
 
 # my_each method
 arr = [2, 3, 1]
