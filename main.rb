@@ -33,3 +33,7 @@ arr.my_count
 # my_map
 arr = ['one', 'two', 'three']
 arr.my_map { |item| item.upcase }
+
+#my_inject
+arr = [1, 2, 3, 4]
+arr.my_inject {|sum, number| sum * number}

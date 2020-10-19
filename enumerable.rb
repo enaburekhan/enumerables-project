@@ -66,11 +66,25 @@ module Enumerable
   def my_map
     array = []
     my_each do |item|
-      array.push(yield(item)) 
+      array.push(yield(item))
     end
     puts "#{array}"
     array
-  end 
+  end
+  def my_inject
+    result = 0
+    my_each do |item|
+      result = yield(result, item)
+    end
+    puts result
+    return result
+  end
+  def multiply_els
+    result = 1
+    my_inject do |item, result|
+      result = yield(result, item)
+    end
+    puts result
+    return result
+  end
 end
-
-
