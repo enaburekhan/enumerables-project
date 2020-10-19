@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require './enumerable.rb'
 
 # my_each method

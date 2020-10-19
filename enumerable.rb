@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Enumerable method
 module Enumerable
   def my_each
@@ -81,9 +79,7 @@ module Enumerable
   end
 
   # rubocop:disable Metrics/PerceivedComplexity
-  # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/CyclomaticComplexity
-  # rubocop:disable Metrics/AbcSize
   def my_inject(start_number = nil, sym = nil)
     # We have to check elements in parentheses
     # because elements in parentheses have priority over the block
@@ -102,9 +98,7 @@ module Enumerable
     puts "the result is #{start_number}"
     start_number
   end
-  # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/CyclomaticComplexity
-  # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/PerceivedComplexity
 
   def multiply_els
