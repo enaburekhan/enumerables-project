@@ -41,8 +41,6 @@ arr = [1, 2, 3, 4]
 arr.my_inject { |item, number| item + number }
 
 [2, 4, 5].multiply_els
-# arr = [1, 2, 3, 4]
-# arr.multiply_els
 
 # my_map proc
 puts 'my_map proc'

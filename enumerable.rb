@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Enumerable method
 module Enumerable
   def my_each
     arr = self
@@ -7,8 +8,8 @@ module Enumerable
       (0..(arr.length - 1)).each do |i|
         yield(arr[i])
       end
-      arr
     end
+    arr
   end
 
   def my_each_with_index
@@ -79,17 +80,21 @@ module Enumerable
     array
   end
 
+  # rubocop:disable Metrics/PerceivedComplexity
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/AbcSize
   def my_inject(start_number = nil, sym = nil)
     # We have to check elements in parentheses
     # because elements in parentheses have priority over the block
     if block_given? && sym.nil?
-      start_number = start_number ? start_number : 0
+      start_number ||= 0
       my_each do |item|
         start_number = yield(start_number, item)
       end
     else
       sym = start_number.is_a?(String) || start_number.is_a?(Symbol) ? start_number : sym
-      start_number = start_number.is_a?(String) || start_number.is_a?(Symbol) ||start_number.nil? ? 0 : start_number
+      start_number = start_number.is_a?(String) || start_number.is_a?(Symbol) || start_number.nil? ? 0 : start_number
       my_each do |item|
         start_number = start_number.send(sym.to_sym, item)
       end
@@ -97,6 +102,10 @@ module Enumerable
     puts "the result is #{start_number}"
     start_number
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/PerceivedComplexity
 
   def multiply_els
     arr = self
