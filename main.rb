@@ -36,4 +36,8 @@ arr.my_map { |item| item.upcase }
 
 #my_inject
 arr = [1, 2, 3, 4]
-arr.my_inject {|sum, number| sum * number}
+arr.my_inject{|item, number| item + number}
+
+[2, 4, 5].multiply_els
+# arr = [1, 2, 3, 4]
+# arr.multiply_els

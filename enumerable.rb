@@ -71,20 +71,34 @@ module Enumerable
     puts "#{array}"
     array
   end
-  def my_inject
-    result = 0
-    my_each do |item|
-      result = yield(result, item)
+  def my_inject(start_number = nil, sym = nil)
+    # We have to check elements in parentheses
+    # because elements in parentheses have priority over the block
+    if block_given? && sym.nil? && start_number.nil? # arr.my_inject{|item, number| item + number}
+      start_number = 0
+      my_each do |item|
+        start_number = yield(start_number, item)
+      end
+    elsif block_given? && sym.nil? && !start_number.nil? # arr.my_inject(2){|item, number| item + number}
+      my_each do |item|
+        start_number = yield(start_number, item)
+      end
+    elsif !block_given? && (start_number.is_a?(String) || start_number.is_a?(Symbol)) # arr.my_inject("+")
+      sym = start_number
+      start_number = 0
+      my_each do |item|
+        start_number = start_number.send( sym.to_sym, item)
+      end
+    elsif !block_given? && !sym.nil? && !start_number.nil? # arr.my_inject(2, "+")
+      my_each do |item|
+        start_number = start_number.send( sym.to_sym, item)
+      end
     end
-    puts result
-    return result
+    puts "the result is #{start_number}"
+    return start_number
   end
   def multiply_els
-    result = 1
-    my_inject do |item, result|
-      result = yield(result, item)
-    end
-    puts result
-    return result
+    arr = self
+    num = arr.my_inject(1, "*")
   end
 end
