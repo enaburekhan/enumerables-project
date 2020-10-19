@@ -36,14 +36,11 @@ To get this project up and running, you must have Ruby installed on your machine
 - Clone the github repository https://github.com/enaburekhan/enumerables-project/tree/feature-branch on your local machine
 - Cd into the clone folder
 - Add Ruby github/workflows
-- After creating the  method on the clone folder.
 - Install ruby extension pack on your IDE or code editor
-- right click and click run to test your codes if it passed the test. If passed;
-- Run rubocop on your working folder
-- Fix errors
+- After creating the various custom enumerables method on the clone folder.
+- Run main.rb to execute the script file
+- Run rubocop on your working folder and fix errors
 - stage, commit, push to the created remote branch(feature-branch) on github and create a pull request.
-
-
 
 
 ## Author
@@ -64,7 +61,7 @@ daviidy )
 
 ## Show your support
 
-If you've read this far, you must like the project! Give me a ⭐️!
+If you've read this far, pls give us a ⭐️!
 
 ## Acknowledgments
 
