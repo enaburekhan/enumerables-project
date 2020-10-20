@@ -1,4 +1,9 @@
+# frozen_string_literal: true
+
 # Enumerable method
+# rubocop:disable Metrics/ModuleLength
+# rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Metrics/CyclomaticComplexity
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -35,19 +40,6 @@ module Enumerable
     result
   end
 
-  # def my_all?
-  #   return false unless block_given?
-
-  #   my_each do |num|
-  #     if yield(num) == false
-  #       puts false
-  #       return false
-  #     end
-  #   end
-  #   puts true
-  #   true
-  # end
-
   def my_all?(arg = nil)
     if block_given?
       my_each { |item| return false if yield(item) == false }
@@ -63,17 +55,6 @@ module Enumerable
     end
     true
   end
-
-  # def my_any?
-  #   my_each do |num|
-  #     if yield(num) == true
-  #       puts true
-  #       return true
-  #     end
-  #   end
-  #   puts false
-  #   false
-  # end
 
   def my_any?(arg = nil)
     if block_given?
@@ -91,24 +72,13 @@ module Enumerable
     false
   end
 
-  # def my_none?
-  #   my_each do |num|
-  #     if yield(num) == true
-  #       puts false
-  #       return false
-  #     end
-  #   end
-  #   puts true
-  #   true
-  # end
-
   def my_none?(arg = nil)
     if !block_given? && arg.nil?
       my_each { |item| return false if yield(item) }
       true
     end
     if !block_given? && !arg.nil?
-      if (arg.is_a? Class)
+      if arg.is_a? Class
         my_each { |num| return false if num.class == arg }
         true
       end
@@ -116,7 +86,7 @@ module Enumerable
         my_each { |num| return false if arg.match(num) }
         true
       end
-      my_each { |num| return false if num == arg}
+      my_each { |num| return false if num == arg }
       true
     end
     my_any? { |item| return false if yield(item) }
@@ -127,10 +97,10 @@ module Enumerable
     array = self if self.class == Array
     array = to_a if self.class == Range
     return array.length unless block_given? || arg
-    return array.my_select{|item| item == arg}.length if arg
-    array.my_select{|item| yield(item)}.length
-  end
+    return array.my_select { |item| item == arg }.length if arg
 
+    array.my_select { |item| yield(item) }.length
+  end
 
   def my_map(proc = nil)
     return to_enum(:my_map) unless block_given?
@@ -145,8 +115,6 @@ module Enumerable
     new_array
   end
 
-  # rubocop:disable Metrics/PerceivedComplexity
-  # rubocop:disable Metrics/CyclomaticComplexity
   def my_inject(start_number = nil, sym = nil)
     # We have to check elements in parentheses
     # because elements in parentheses have priority over the block
@@ -165,12 +133,13 @@ module Enumerable
     puts "the result is #{start_number}"
     start_number
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
-  # rubocop:enable Metrics/PerceivedComplexity
 end
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Metrics/ModuleLength
 
 public
 
 def multiply_els(arr)
-  arr.my_inject(1, "*")
+  arr.my_inject(1, '*')
 end
