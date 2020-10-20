@@ -47,8 +47,5 @@ arr = [1, 2, 3, 4]
 arr.my_inject { |item, number| item + number }
 
 # multiply_els
-# array = [2, 4, 5]
-multiply_els([2, 4, 5])
 puts 'multiply_els'
-
-
+multiply_els([2, 4, 5])

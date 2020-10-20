@@ -167,9 +167,10 @@ module Enumerable
   end
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
+end
 
-  def multiply_els(arr)
-    # arr = self
-    arr.my_inject { |number, result| number * result }
-  end  
+public
+
+def multiply_els(arr)
+  arr.my_inject(1, "*")
 end
