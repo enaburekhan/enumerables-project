@@ -91,24 +91,44 @@ module Enumerable
     false
   end
 
-  def my_none?
-    my_each do |num|
-      if yield(num) == true
-        puts false
-        return false
-      end
+  # def my_none?
+  #   my_each do |num|
+  #     if yield(num) == true
+  #       puts false
+  #       return false
+  #     end
+  #   end
+  #   puts true
+  #   true
+  # end
+
+  def my_none?(arg = nil)
+    if !block_given? && arg.nil?
+      my_each { |item| return false if yield(item) }
+      true
     end
-    puts true
+    if !block_given? && !arg.nil?
+      if (arg.is_a? Class)
+        my_each { |num| return false if num.class == arg }
+        true
+      end
+      if !arg.nil? && arg.class == Regexp
+        my_each { |num| return false if arg.match(num) }
+        true
+      end
+      my_each { |num| return false if num == arg}
+      true
+    end
+    my_any? { |item| return false if yield(item) }
     true
   end
 
-  def my_count
-    count = 0
-    my_each do |_acc|
-      count += 1
-    end
-    puts count
-    count
+  def my_count(arg = nil)
+    array = self if self.class == Array
+    array = to_a if self.class == Range
+    return array.length unless block_given? || arg
+    return array.my_select{|item| item == arg}.length if arg
+    array.my_select{|item| yield(item)}.length
   end
 
   def my_map
