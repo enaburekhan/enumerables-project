@@ -12,7 +12,7 @@ module Enumerable
     (0..(arr.length - 1)).each do |i|
       yield(arr[i])
     end
-    arr
+    self
   end
 
   def my_each_with_index

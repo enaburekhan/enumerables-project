@@ -2,16 +2,30 @@ require './enumerable.rb'
 
 # rubocop:disable Lint/AmbiguousBlockAssociation
 # my_each method
-puts 'my_each'
-arr = { 'two' => 2, 'three' => 3, 'one' => 1 }
-arr.my_each { |num| puts num }
+puts 'my_each Array'
+[1, 3, 5, 7].my_each do |num|
+  puts num
+end  
+
+puts 'my_each Range'
+(1..7).my_each do |num|
+  puts num
+end  
 
 # my_each_with_index
-puts 'my_each_with_index'
+puts 'my_each_with_index Array'
 array = [4, 5, 6]
 array.my_each_with_index do |num, index|
   puts "#{num} : #{index}"
 end
+
+puts 'my_each_with_index Range'
+
+(1..7).my_each_with_index do |num, index|
+  puts "#{num} : #{index}"
+end
+
+
 
 # my_select
 puts 'my_select'
@@ -21,12 +35,12 @@ array.my_select(&:even?)
 # my_all?
 puts 'my_all'
 arr = [2, 2, 2]
-puts arr.my_all? { |num| num > 1 }
+puts arr.my_all? { |num| num.is_a? Numeric }
 
 # my_any?
 puts 'my_any'
 arr = [2, 2, 2, 4]
-puts arr.my_any? { |num| num > 3 }
+puts arr.my_any? { |num| num.is_a? Numeric }
 
 # my_none?
 puts 'my_none'
