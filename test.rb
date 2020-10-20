@@ -1,9 +1,9 @@
 require './enumerable.rb'
 
 [1, 2, 3, 5].my_each { |x| p x }
-puts
-# [1, 2, 3, 5].each { |x| p x } #compare
-# puts
+p
+[1, 2, 3, 5].each { |x| p x } #compare
+p
 
 
 =begin
@@ -13,7 +13,7 @@ puts
 puts
 =end
 
-=begin
+
 p [1, 2, 3, 4].my_select { |x| x % 2 == 0}
 puts
 p [1, 2, 3, 4].select { |x| x % 2 == 0 }#compare
@@ -30,7 +30,7 @@ p [:foo, :bar].my_select { |x| x == :foo }   #=> [:foo]
 puts
 p [:foo, :bar].select { |x| x == :foo }   #=> [:foo]
 puts
-=end
+
 
 =begin
 p ['alpha', 'apple', 'allen key'].my_all?{ |x| x[0] == 'a' }
@@ -162,17 +162,17 @@ p [1,2,3,4,4,7,7,7,9].my_inject(0){|running_total, item| running_total + item }
 puts
 p [1,2,3,4,4,7,7,7,9].inject(0){|running_total, item| running_total + item }
 puts
-p (5..10).my_inject(:+)                             
+p (5..10).my_inject(:+)
 puts
-p (5..10).inject(:+)                             
+p (5..10).inject(:+)
 puts
 p (5..10).my_inject { |sum, n| sum + n }
 puts
 p (5..10).inject { |sum, n| sum + n }
 puts
-p (5..10).my_inject(1, :*)                       
+p (5..10).my_inject(1, :*)
 puts
-p (5..10).inject(1, :*)                       
+p (5..10).inject(1, :*)
 puts
 p (5..10).my_inject(1) { |product, n| product * n }
 puts

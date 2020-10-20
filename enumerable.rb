@@ -1,4 +1,5 @@
 # Enumerable method
+# rubocop:disable all
 # rubocop:disable Metrics/ModuleLength
 # rubocop:disable Metrics/PerceivedComplexity
 # rubocop:disable Metrics/CyclomaticComplexity
@@ -12,7 +13,7 @@ module Enumerable
     (0..(arr.length - 1)).each do |i|
       yield(arr[i])
     end
-    self
+    arr
   end
 
   def my_each_with_index
@@ -34,7 +35,6 @@ module Enumerable
     my_each do |item|
       result.push(item) if yield(item)
     end
-    puts result.to_s
     result
   end
 
@@ -109,7 +109,6 @@ module Enumerable
     elsif block_given?
       my_each { |item| new_array << yield(item) }
     end
-    p new_array
     new_array
   end
 
@@ -128,7 +127,6 @@ module Enumerable
         start_number = start_number.send(sym.to_sym, item)
       end
     end
-    puts "the result is #{start_number}"
     start_number
   end
 end
