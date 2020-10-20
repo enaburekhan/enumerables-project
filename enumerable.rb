@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Enumerable method
 # rubocop:disable Metrics/ModuleLength
 # rubocop:disable Metrics/PerceivedComplexity

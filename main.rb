@@ -1,7 +1,6 @@
-# frozen_string_literal: true
-
 require './enumerable.rb'
 
+# rubocop:disable Lint/AmbiguousBlockAssociation
 # my_each method
 puts 'my_each'
 arr = { 'two' => 2, 'three' => 3, 'one' => 1 }
@@ -51,3 +50,5 @@ arr.my_inject { |item, number| item + number }
 # multiply_els
 puts 'multiply_els'
 multiply_els([2, 4, 5])
+
+# rubocop:enable Lint/AmbiguousBlockAssociation
