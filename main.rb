@@ -5,12 +5,12 @@ require './enumerable.rb'
 puts 'my_each Array'
 [1, 3, 5, 7].my_each do |num|
   puts num
-end  
+end
 
 puts 'my_each Range'
 (1..7).my_each do |num|
   puts num
-end  
+end
 
 # my_each_with_index
 puts 'my_each_with_index Array'
@@ -25,12 +25,10 @@ puts 'my_each_with_index Range'
   puts "#{num} : #{index}"
 end
 
-
-
 # my_select
 puts 'my_select'
 array = [4, 5, 3, 8, 9]
-array.my_select(&:even?)
+p array.my_select(&:even?)
 
 # my_all?
 puts 'my_all'
@@ -55,14 +53,19 @@ puts arr.my_count { |item| item > 2 }
 # my_map
 puts 'my_map'
 arr = %w[one two three]
-arr.my_map(&:upcase)
+p arr.my_map do |i|
+  i.upcase
+end
 
 # my_inject
+puts 'my_inject'
 arr = [1, 2, 3, 4]
-arr.my_inject { |item, number| item + number }
+puts arr.my_inject(:+)
+
+p %w{ cat sheep bear }.my_inject {|memo, word| memo.length > word.length ? memo : word}
 
 # multiply_els
 puts 'multiply_els'
-multiply_els([2, 4, 5])
+puts multiply_els([2, 4, 5])
 
 # rubocop:enable Lint/AmbiguousBlockAssociation

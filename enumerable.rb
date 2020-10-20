@@ -10,8 +10,8 @@ module Enumerable
     arr = self if self.class == Array
     arr = to_a if self.class == Range
     arr = flatten if self.class == Hash
-    (0..(arr.length - 1)).each do |i|
-      yield(arr[i])
+    for i in arr
+      yield i
     end
     arr
   end
@@ -22,8 +22,8 @@ module Enumerable
     arr = self if self.class == Array
     arr = to_a if self.class == Range
     arr = flatten if self.class == Hash
-    (0..(arr.length - 1)).each do |i|
-      yield(arr[i], i)
+    for i in 0...(arr.length)
+      yield arr[i], i
     end
     self
   end
@@ -115,19 +115,20 @@ module Enumerable
   def my_inject(start_number = nil, sym = nil)
     # We have to check elements in parentheses
     # because elements in parentheses have priority over the block
-    if block_given? && sym.nil?
-      start_number ||= 0
+    if block_given?
+      num = start_number
       my_each do |item|
-        start_number = yield(start_number, item)
+        num = num.nil? ? item : yield(num, item)
       end
+      num
     else
       sym = start_number.is_a?(String) || start_number.is_a?(Symbol) ? start_number : sym
-      start_number = start_number.is_a?(String) || start_number.is_a?(Symbol) || start_number.nil? ? 0 : start_number
+      num = start_number.is_a?(String) || start_number.is_a?(Symbol) ? nil : start_number
       my_each do |item|
-        start_number = start_number.send(sym.to_sym, item)
+        num = num.nil? ? item : num.send(sym.to_sym, item)
       end
+      num
     end
-    start_number
   end
 end
 # rubocop:enable Metrics/CyclomaticComplexity
