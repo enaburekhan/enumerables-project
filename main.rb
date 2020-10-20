@@ -38,6 +38,7 @@ arr = [2, 2, 2, 4, 5]
 puts arr.my_count {|item| item > 2}
 
 # my_map
+puts "my_map"
 arr = %w[one two three]
 arr.my_map(&:upcase)
 
@@ -45,9 +46,9 @@ arr.my_map(&:upcase)
 arr = [1, 2, 3, 4]
 arr.my_inject { |item, number| item + number }
 
-[2, 4, 5].multiply_els
+# multiply_els
+# array = [2, 4, 5]
+multiply_els([2, 4, 5])
+puts 'multiply_els'
 
-# my_map proc
-puts 'my_map proc'
-my_proc = proc { |num| num * num }
-[1, 2, 3, 4].my_map_proc(my_proc)
+

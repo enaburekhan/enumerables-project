@@ -131,13 +131,18 @@ module Enumerable
     array.my_select{|item| yield(item)}.length
   end
 
-  def my_map
-    array = []
-    my_each do |item|
-      array.push(yield(item))
+
+  def my_map(proc = nil)
+    return to_enum(:my_map) unless block_given?
+
+    new_array = []
+    if proc
+      my_each { |item| new_array << proc.call(item) }
+    elsif block_given?
+      my_each { |item| new_array << yield(item) }
     end
-    puts array.to_s
-    array
+    p new_array
+    new_array
   end
 
   # rubocop:disable Metrics/PerceivedComplexity
@@ -163,19 +168,8 @@ module Enumerable
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
 
-  def multiply_els
-    arr = self
-    arr.my_inject(1, '*')
-  end
-
-  def my_map_proc(proc = nil)
-    new_array = []
-    if proc
-      my_each { |item| new_array << proc.call(item) }
-    elsif block_given?
-      my_each { |item| new_array << yield(item) }
-    end
-    p new_array
-    new_array
-  end
+  def multiply_els(arr)
+    # arr = self
+    arr.my_inject { |number, result| number * result }
+  end  
 end
