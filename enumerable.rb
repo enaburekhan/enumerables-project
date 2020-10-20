@@ -1,8 +1,5 @@
 # Enumerable method
 # rubocop:disable all
-# rubocop:disable Metrics/ModuleLength
-# rubocop:disable Metrics/PerceivedComplexity
-# rubocop:disable Metrics/CyclomaticComplexity
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
