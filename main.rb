@@ -1,7 +1,7 @@
 require './enumerable.rb'
 
 # my_each method
-arr = [2, 3, 1]
+arr = {'two' => 2, 'three' => 3, 'one' => 1 }
 arr.my_each { |num| puts num }
 
 # my_each_with_index
@@ -15,12 +15,16 @@ array = [4, 5, 3, 8, 9]
 array.my_select(&:even?)
 
 # my_all?
+puts "my_all"
 arr = [2, 2, 2]
-arr.my_all? { |num| num == 2 }
+puts arr.my_all? { |num| num == 2 }
 
 # my_any?
+puts "my_any"
 arr = [2, 2, 2, 4]
-arr.my_any? { |num| num > 3 }
+puts arr.my_any? { |num| num > 3 }
+
+
 
 # my_none?
 arr = [2, 2, 2, 4]

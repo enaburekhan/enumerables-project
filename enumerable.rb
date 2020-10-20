@@ -1,24 +1,32 @@
 # Enumerable method
 module Enumerable
   def my_each
-    arr = self
-    if arr.is_a?(Array)
-      (0..(arr.length - 1)).each do |i|
-        yield(arr[i])
-      end
+    return to_enum(:my_each) unless block_given?
+
+    arr = self if self.class == Array
+    arr = to_a if self.class == Range
+    arr = flatten if self.class == Hash
+    (0..(arr.length - 1)).each do |i|
+      yield(arr[i])
     end
     arr
   end
 
   def my_each_with_index
-    arr = self
+    return to_enum(:my_each_with_index) unless block_given?
+
+    arr = self if self.class == Array
+    arr = to_a if self.class == Range
+    arr = flatten if self.class == Hash
     (0..(arr.length - 1)).each do |i|
       yield(arr[i], i)
     end
-    arr
+    self
   end
 
   def my_select
+    return to_enum(:my_select) unless block_given?
+
     result = []
     my_each do |item|
       result.push(item) if yield(item)
@@ -27,25 +35,59 @@ module Enumerable
     result
   end
 
-  def my_all?
-    my_each do |num|
-      if yield(num) == false
-        puts false
-        return false
-      end
+  # def my_all?
+  #   return false unless block_given?
+
+  #   my_each do |num|
+  #     if yield(num) == false
+  #       puts false
+  #       return false
+  #     end
+  #   end
+  #   puts true
+  #   true
+  # end
+
+  def my_all?(arg = nil)
+    if block_given?
+      my_each { |item| return false if yield(item) == false }
+      return true
+    elsif arg.nil?
+      my_each { |num| return false if num.nil? || num == false }
+    elsif !arg.nil? && (arg.is_a? Class)
+      my_each { |num| return false if num.class != arg }
+    elsif !arg.nil? && arg.class == Regexp
+      my_each { |num| return false unless arg.match(num) }
+    else
+      my_each { |num| return false if num != arg }
     end
-    puts true
     true
   end
 
-  def my_any?
-    my_each do |num|
-      if yield(num) == true
-        puts true
-        return true
-      end
+  # def my_any?
+  #   my_each do |num|
+  #     if yield(num) == true
+  #       puts true
+  #       return true
+  #     end
+  #   end
+  #   puts false
+  #   false
+  # end
+
+  def my_any?(arg = nil)
+    if block_given?
+      my_each { |item| return true if yield(item) }
+      false
+    elsif arg.nil?
+      my_each { |num| return true if num }
+    elsif !arg.nil? && (arg.is_a? Class)
+      my_each { |num| return true if num.class == arg }
+    elsif !arg.nil? && arg.class == Regexp
+      my_each { |num| return true if arg.match(num) }
+    else
+      my_each { |num| return true if num == arg }
     end
-    puts false
     false
   end
 
