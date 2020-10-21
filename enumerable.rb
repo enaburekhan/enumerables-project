@@ -7,7 +7,7 @@ module Enumerable
     arr = self if self.class == Array
     arr = to_a if self.class == Range
     arr = flatten if self.class == Hash
-    for i in arr
+    for i in self
       yield i
     end
     arr
@@ -17,12 +17,11 @@ module Enumerable
     return to_enum(:my_each_with_index) unless block_given?
 
     arr = self if self.class == Array
-    arr = to_a if self.class == Range
-    arr = flatten if self.class == Hash
-    for i in 0...(arr.length)
-      yield arr[i], i
+    arr = to_a if self.class == Range || self.class == Hash
+    for i in 0...arr.length
+      result = yield(arr[i], i)
     end
-    self
+    result
   end
 
   def my_select
@@ -42,7 +41,7 @@ module Enumerable
     elsif arg.nil?
       my_each { |num| return false if num.nil? || num == false }
     elsif !arg.nil? && (arg.is_a? Class)
-      my_each { |num| return false if num.class != arg }
+      my_each { |num| return false if !num.is_a?(arg) }
     elsif !arg.nil? && arg.class == Regexp
       my_each { |num| return false unless arg.match(num) }
     else
@@ -58,7 +57,7 @@ module Enumerable
     elsif arg.nil?
       my_each { |num| return true if num }
     elsif !arg.nil? && (arg.is_a? Class)
-      my_each { |num| return true if num.class == arg }
+      my_each { |num| return true if num.is_a?(arg) }
     elsif !arg.nil? && arg.class == Regexp
       my_each { |num| return true if arg.match(num) }
     else
@@ -69,20 +68,20 @@ module Enumerable
 
   def my_none?(arg = nil)
     if !block_given? && arg.nil?
-      my_each { |item| return false if yield(item) }
-      true
+      my_each { |num| return false if num }
+      return true
     end
     if !block_given? && !arg.nil?
       if arg.is_a? Class
-        my_each { |num| return false if num.class == arg }
-        true
+        my_each { |num| return false if num.is_a?(arg) }
+        return true
       end
       if !arg.nil? && arg.class == Regexp
         my_each { |num| return false if arg.match(num) }
-        true
+        return true
       end
       my_each { |num| return false if num == arg }
-      true
+      return true
     end
     my_any? { |item| return false if yield(item) }
     true
@@ -112,6 +111,9 @@ module Enumerable
   def my_inject(start_number = nil, sym = nil)
     # We have to check elements in parentheses
     # because elements in parentheses have priority over the block
+    if !block_given? && start_number.nil? && sym.nil?
+      yield(start_number, sym)
+    end
     if block_given?
       num = start_number
       my_each do |item|
