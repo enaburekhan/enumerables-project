@@ -10,7 +10,7 @@ module Enumerable
     for i in self
       yield i
     end
-    arr
+    self
   end
 
   def my_each_with_index
@@ -21,7 +21,7 @@ module Enumerable
     for i in 0...arr.length
       result = yield(arr[i], i)
     end
-    result
+    self
   end
 
   def my_select
