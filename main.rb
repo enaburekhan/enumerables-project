@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './enumerable.rb'
 
 # rubocop:disable all
