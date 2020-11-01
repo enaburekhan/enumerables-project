@@ -52,4 +52,11 @@ describe Enumerable do
       expect(arr.my_count(&:even?)).to eql(3)
     end
   end
+
+  describe '#my_map' do
+    let(:range) {(1..4)}
+    it 'returns a new array with the result for running block once for every element in enum' do
+      expect(range.my_map{ |num| num * num }).to eql([1, 4, 9, 16])
+    end
+  end
 end
