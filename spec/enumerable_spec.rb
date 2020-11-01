@@ -36,12 +36,20 @@ describe Enumerable do
     end
   end
 
-  describe '#my_none'
-  let(:arr) { %w[ant bear cat] }
-  it 'returns false if it matches atleast one condition on the block' do
-    expect(arr.none? { |word| word.length >= 3 } ).to eql(false)
+  describe '#my_none' do
+    let(:arr) { %w[ant bear cat] }
+    it 'returns false if it matches atleast one condition on the block' do
+     expect(arr.none? { |word| word.length >= 3 } ).to eql(false)
+    end
+    it 'returns true if it matches no condition on the block' do
+     expect(arr.none?(/d/)).to eql(true)
+    end
   end
-  it 'returns true if it matches no condition on the block' do
-    expect(arr.none?(/d/)).to eql(true)
+
+  describe '#my_count' do
+    let(:arr) { [1, 2, 4, 2] }
+    it 'counts and returns the number of elements for which the block returns a true value' do
+      expect(arr.my_count(&:even?)).to eql(3)
+    end
   end
 end
