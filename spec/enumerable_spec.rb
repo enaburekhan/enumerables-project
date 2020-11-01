@@ -29,7 +29,7 @@ describe Enumerable do
   describe '#my_all?' do
     let(:arr) { %w[ant bear cat] }
     it 'returns true if it matches atleast one condition on the block' do
-      expect(arr.my_any? { |word| word.length >= 3 } ).to eql(true)
+      expect(arr.my_any? { |word| word.length >= 3 }).to eql(true)
     end
     it 'returns false if it matches no condition on the block' do
       expect(arr.my_any?(/d/)).to eql(false)
@@ -39,10 +39,10 @@ describe Enumerable do
   describe '#my_none' do
     let(:arr) { %w[ant bear cat] }
     it 'returns false if it matches atleast one condition on the block' do
-     expect(arr.none? { |word| word.length >= 3 } ).to eql(false)
+      expect(arr.none? { |word| word.length >= 3 }).to eql(false)
     end
     it 'returns true if it matches no condition on the block' do
-     expect(arr.none?(/d/)).to eql(true)
+      expect(arr.none?(/d/)).to eql(true)
     end
   end
 
@@ -54,23 +54,23 @@ describe Enumerable do
   end
 
   describe '#my_map' do
-    let(:range) {(1..4)}
+    let(:range) { (1..4) }
     it 'returns a new array with the result for running block once for every element in enum' do
-      expect(range.my_map{ |num| num * num }).to eql([1, 4, 9, 16])
+      expect(range.my_map { |num| num * num }).to eql([1, 4, 9, 16])
     end
   end
 
   describe '#my_inject' do
-    let(:range) {(5..10)}
+    let(:range) { (5..10) }
     it 'it returns a new value combining all elements of enum by applying the giving binary operation' do
-        expect(range.my_inject { |sum, n| sum + n }).to eql(45)    
-    end  
-  end 
-  
+      expect(range.my_inject { |sum, n| sum + n }).to eql(45)
+    end
+  end
+
   describe '#multiply_els' do
     let(:arr) { [2, 4, 5] }
     it 'it returns the product of elements in enum' do
-        expect(multiply_els(arr)).to eql(40)
+      expect(multiply_els(arr)).to eql(40)
     end
-  end    
+  end
 end

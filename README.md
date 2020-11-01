@@ -1,5 +1,5 @@
-# enumerables-project
-This project is the second one in Ruby module at Microverse. In this project, we created custom enumerables methods for the following:
+# enumerables-project_test_case
+This project is the seventh one in Ruby module at Microverse. In this project, we created custom test cases for enumerables methods for the following:
 - #my_each
 - #my_each_with_index
 - #select
@@ -10,7 +10,6 @@ This project is the second one in Ruby module at Microverse. In this project, we
 - #my_map
 - #my_inject
 - #multiply_els
-- #my_map_proc
 
 ![onlineCodingDirectory-screen-shot](./readme.png)
 
@@ -23,7 +22,7 @@ This project is the second one in Ruby module at Microverse. In this project, we
 
 ## Getting Started
 
-This project involves creating custom enumerables methods to emulate the regular ruby enumerables in terms of functionality. 
+This project involves creating test cases for the custom enumerables methods to emulate the regular ruby enumerables in terms of functionality. 
 
 ### Prerequisites
 
@@ -33,12 +32,12 @@ To get this project up and running, you must have Ruby installed on your machine
 
 **To get this project set up on your local machine, follow these simple steps:**
 
-- Clone the github repository https://github.com/enaburekhan/enumerables-project/tree/feature-branch on your local machine
-- Cd into the clone folder
+- Clone the github repository https://github.com/enaburekhan/enumerables-project/tree/enum_test on your local machine
+- Cd into the clone folder  
 - Add Ruby github/workflows
 - Install ruby extension pack on your IDE or code editor
-- After creating the various custom enumerables method on the clone folder.
-- Run main.rb to execute the script file
+- After creating the various custom enumerables method and the enumerable_spec on the clone folder.
+- Run rspec to execute the script file
 - Run rubocop on your working folder and fix errors
 - stage, commit, push to the created remote branch(feature-branch) on github and create a pull request.
 
@@ -51,12 +50,11 @@ To get this project up and running, you must have Ruby installed on your machine
 - Twitter: [@enaburekhaneric](https://twitter.com/enaburekhaneric)
 - Linkedin: [@ericenaburekhan](https://www.linkedin.com/in/eric-enaburekhan-801a28100/)
 
-👤 **David Yao**
+👤 **Oluwaseun Iyadi**
 
-- Github: [@daviidy](https://github.com/daviidy )
-- Twitter: [@DavidYao3](https://twitter.com/DavidYao3)
-- Linkedin: [@DavidYao](https://www.linkedin.com/in/david-yao-6bb95299/ 
-daviidy )
+- Github: [@CornerstoneII](https://github.com/CornerstoneII)
+- Twitter: [@It_Iz_I](https://twitter.com/It_Iz_I))
+- Linkedin: [Oluwaseun Iyadi](https://www.linkedin.com/in/oluwaseun-iyadi-773584b4/)
 
 
 ## Show your support
