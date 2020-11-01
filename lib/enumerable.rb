@@ -15,13 +15,13 @@ module Enumerable
 
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
-
+    result = []
     arr = self if self.class == Array
     arr = to_a if self.class == Range || self.class == Hash
     for i in 0...arr.length
-      result = yield(arr[i], i)
+      result << yield(arr[i], i)
     end
-    self
+    result
   end
 
   def my_select
