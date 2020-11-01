@@ -59,4 +59,18 @@ describe Enumerable do
       expect(range.my_map{ |num| num * num }).to eql([1, 4, 9, 16])
     end
   end
+
+  describe '#my_inject' do
+    let(:range) {(5..10)}
+    it 'it returns a new value combining all elements of enum by applying the giving binary operation' do
+        expect(range.my_inject { |sum, n| sum + n }).to eql(45)    
+    end  
+  end 
+  
+  describe '#multiply_els' do
+    let(:arr) { [2, 4, 5] }
+    it 'it returns the product of elements in enum' do
+        expect(multiply_els(arr)).to eql(40)
+    end
+  end    
 end
