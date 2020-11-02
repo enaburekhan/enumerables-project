@@ -3,7 +3,6 @@
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
-
     arr = self if self.class == Array
     arr = to_a if self.class == Range
     arr = flatten if self.class == Hash
@@ -15,18 +14,17 @@ module Enumerable
 
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
-
+    result = []
     arr = self if self.class == Array
     arr = to_a if self.class == Range || self.class == Hash
     for i in 0...arr.length
-      result = yield(arr[i], i)
+      result << yield(arr[i], i)
     end
-    self
+    result
   end
 
   def my_select
     return to_enum(:my_select) unless block_given?
-
     result = []
     my_each do |item|
       result.push(item) if yield(item)
@@ -130,6 +128,7 @@ module Enumerable
     end
   end
 end
+
 
 public
 
