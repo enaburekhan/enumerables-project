@@ -19,7 +19,8 @@ describe Enumerable do
       let(:ruby_test) { [] }
       it 'iterate through the array' do
         range.my_each { |num| custom_test << num }
-        range.each { |num| custom_test << num }
+        range.each { |num| ruby_test << num }
+        expect(custom_test).to eql(ruby_test)
       end
     end
   end
